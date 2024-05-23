@@ -23,7 +23,6 @@ export default function HomePage() {
         <SearchBar
           placeHolder="Search by City or Town"
           onSubmit={handleSearchSubmit}
-          searchQuery={""}
         />
       </div>
       <div className="grid md:grid-cols-2 gap-5">
