@@ -22,12 +22,7 @@ type Props = {
   searchQuery?: string;
 };
 
-export default function SearchBar({
-  onSubmit,
-  onReset,
-  placeHolder,
-  searchQuery,
-}: Props) {
+const SearchBar = ({ onSubmit, onReset, placeHolder, searchQuery }: Props) => {
   const form = useForm<SearchForm>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,7 +48,7 @@ export default function SearchBar({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={`flex items-center justify-between gap-3 flex-row border-2 rounded-full p-3  ${
+        className={`flex items-center gap-3 justify-between flex-row border-2 rounded-full p-3 ${
           form.formState.errors.searchQuery && "border-red-500"
         }`}
       >
@@ -66,7 +61,7 @@ export default function SearchBar({
           control={form.control}
           name="searchQuery"
           render={({ field }) => (
-            <FormItem className="flex-1 ">
+            <FormItem className="flex-1">
               <FormControl>
                 <Input
                   {...field}
@@ -77,6 +72,7 @@ export default function SearchBar({
             </FormItem>
           )}
         />
+
         <Button
           onClick={handleReset}
           type="button"
@@ -91,4 +87,6 @@ export default function SearchBar({
       </form>
     </Form>
   );
-}
+};
+
+export default SearchBar;

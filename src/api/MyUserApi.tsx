@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { User } from "@/types";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation, useQuery } from "react-query";
@@ -12,7 +11,7 @@ export const useGetMyUser = () => {
   const getMyUserRequest = async (): Promise<User> => {
     const accessToken = await getAccessTokenSilently();
 
-    const res = await fetch(`${API_BASE_URL}/api/my/user`, {
+    const response = await fetch(`${API_BASE_URL}/api/my/user`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -20,11 +19,11 @@ export const useGetMyUser = () => {
       },
     });
 
-    if (!res.ok) {
+    if (!response.ok) {
       throw new Error("Failed to fetch user");
     }
 
-    return res.json();
+    return response.json();
   };
 
   const {
@@ -50,7 +49,7 @@ export const useCreateMyUser = () => {
 
   const createMyUserRequest = async (user: CreateUserRequest) => {
     const accessToken = await getAccessTokenSilently();
-    const res = await fetch(`${API_BASE_URL}/api/my/user`, {
+    const response = await fetch(`${API_BASE_URL}/api/my/user`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -59,7 +58,7 @@ export const useCreateMyUser = () => {
       body: JSON.stringify(user),
     });
 
-    if (!res.ok) {
+    if (!response.ok) {
       throw new Error("Failed to create user");
     }
   };
@@ -91,7 +90,8 @@ export const useUpdateMyUser = () => {
 
   const updateMyUserRequest = async (formData: UpdateMyUserRequest) => {
     const accessToken = await getAccessTokenSilently();
-    const res = await fetch(`${API_BASE_URL}/api/my/user`, {
+
+    const response = await fetch(`${API_BASE_URL}/api/my/user`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -100,11 +100,11 @@ export const useUpdateMyUser = () => {
       body: JSON.stringify(formData),
     });
 
-    if (!res.ok) {
+    if (!response.ok) {
       throw new Error("Failed to update user");
     }
 
-    return res.json();
+    return response.json();
   };
 
   const {
@@ -112,6 +112,7 @@ export const useUpdateMyUser = () => {
     isLoading,
     isSuccess,
     error,
+    reset,
   } = useMutation(updateMyUserRequest);
 
   if (isSuccess) {
@@ -120,10 +121,8 @@ export const useUpdateMyUser = () => {
 
   if (error) {
     toast.error(error.toString());
+    reset();
   }
 
-  return {
-    updateUser,
-    isLoading,
-  };
+  return { updateUser, isLoading };
 };

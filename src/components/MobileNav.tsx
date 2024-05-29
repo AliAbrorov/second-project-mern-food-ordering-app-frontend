@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { CircleUserRound, Menu } from "lucide-react";
 import {
   Sheet,
@@ -12,7 +11,7 @@ import { Button } from "./ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
 import MobileNavLinks from "./MobileNavLinks";
 
-export default function MobileNav() {
+const MobileNav = () => {
   const { isAuthenticated, loginWithRedirect, user } = useAuth0();
 
   return (
@@ -28,7 +27,7 @@ export default function MobileNav() {
               {user?.email}
             </span>
           ) : (
-            <span>Welcome to MernEats.com</span>
+            <span> Welcome to MernEats.com!</span>
           )}
         </SheetTitle>
         <Separator />
@@ -40,11 +39,13 @@ export default function MobileNav() {
               onClick={() => loginWithRedirect()}
               className="flex-1 font-bold bg-orange-500"
             >
-              Log in
+              Log In
             </Button>
           )}
         </SheetDescription>
       </SheetContent>
     </Sheet>
   );
-}
+};
+
+export default MobileNav;

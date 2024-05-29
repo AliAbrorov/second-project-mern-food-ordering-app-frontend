@@ -13,11 +13,7 @@ type Props = {
   onPageChange: (page: number) => void;
 };
 
-export default function PaginationSelector({
-  page,
-  pages,
-  onPageChange,
-}: Props) {
+const PaginationSelector = ({ page, pages, onPageChange }: Props) => {
   const pageNumbers = [];
   for (let i = 1; i <= pages; i++) {
     pageNumbers.push(i);
@@ -55,4 +51,6 @@ export default function PaginationSelector({
       </PaginationContent>
     </Pagination>
   );
-}
+};
+
+export default PaginationSelector;

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useSearchRestaurants } from "@/api/RestaurantApi";
 import CuisineFilter from "@/components/CuisineFilter";
-import LoadingSpinner from "@/components/LoadingSpinner";
+// import LoadingSpinner from "@/components/LoadingSpinner";
 import PaginationSelector from "@/components/PaginationSelector";
 import SearchBar, { SearchForm } from "@/components/SearchBar";
 import SearchResultCard from "@/components/SearchResultCard";
@@ -67,7 +67,7 @@ export default function SearchPage() {
   };
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return "Loading";
   }
 
   if (!results?.data || !city) {
@@ -81,7 +81,7 @@ export default function SearchPage() {
           selectedCuisines={searchState.selectedCuisines}
           onChange={setSelectedCuisnes}
           isExpanded={isExpanded}
-          onExpandedClicked={() => setIsExpanded((prevIsExp) => !prevIsExp)}
+          onExpandedClick={() => setIsExpanded((prevIsExp) => !prevIsExp)}
         />
       </div>
 
@@ -89,7 +89,7 @@ export default function SearchPage() {
         <SearchBar
           searchQuery={searchState.searchQuery}
           onSubmit={setSearchQuery}
-          placeHolder="Search by Cuisine or restaurant name"
+          placeHolder="Search by Cuisine or Restaurant name"
           onReset={resetSearch}
         />
         <div className="flex justify-between flex-col gap-3 lg:flex-row">
