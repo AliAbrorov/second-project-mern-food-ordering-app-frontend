@@ -61,7 +61,7 @@ const OrderItemCard = ({ order }: Props) => {
               {order.deliveryDetails.addressLine1}, {order.deliveryDetails.city}
             </span>
           </div>
-          <div>
+          <div className="md:ml-16">
             Time:
             <span className="ml-2 font-normal">{getTime()}</span>
           </div>
@@ -90,7 +90,9 @@ const OrderItemCard = ({ order }: Props) => {
           <Select
             value={status}
             disabled={isLoading}
-            onValueChange={(value) => handleStatusChange(value as OrderStatus)}
+            onValueChange={(value: string) =>
+              handleStatusChange(value as OrderStatus)
+            }
           >
             <SelectTrigger id="status">
               <SelectValue placeholder="Status" />
